@@ -21,6 +21,6 @@
     <p>[I can learn corde ]</p>
     <h2>যোগাযোগ</h2>
     <p>ইমেইল: [rahmanzubair50@gmail.com]</p>
-    <p>ফেসবুক: [আপনার ফেসবুক লিঙ্ক]</p>
+    <p>ফেসবুক: [https://www.facebook.com/share/1BT6rnMgUn/]</p>
 </body>
 </html>
