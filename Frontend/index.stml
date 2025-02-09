@@ -1,0 +1,100 @@
+// DOM Elements
+const domElements = {
+  videoSubject: document.querySelector("#videoSubject"),
+  aiModel: document.querySelector("#aiModel"),
+  voice: document.querySelector("#voice"),
+  zipUrl: document.querySelector("#zipUrl"),
+  paragraphNumber: document.querySelector("#paragraphNumber"),
+  youtubeToggle: document.querySelector("#youtubeUploadToggle"),
+  useMusicToggle: document.querySelector("#useMusicToggle"),
+  customPrompt: document.querySelector("#customPrompt"),
+  generateButton: document.querySelector("#generateButton"),
+  cancelButton: document.querySelector("#cancelButton"),
+  advancedOptions: document.querySelector("#advancedOptions"),
+  advancedOptionsToggle: document.querySelector("#advancedOptionsToggle")
+};
+
+// Toggle Advanced Options
+const toggleAdvancedOptions = () => {
+  const { advancedOptionsToggle, advancedOptions } = domElements;
+  const isExpanded = advancedOptionsToggle.textContent.includes("▼");
+  
+  advancedOptionsToggle.textContent = isExpanded 
+    ? "Show less Options ▲" 
+    : "Show Advanced Options ▼";
+  
+  advancedOptions.classList.toggle("hidden");
+};
+
+// API Client
+const apiClient = {
+  async post(url, data) {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) throw new Error("API request failed");
+    return response.json();
+  }
+};
+
+// UI Helpers
+const uiHelpers = {
+  toggleButtonState(button, { disabled = false, hidden = false } = {}) {
+    button.disabled = disabled;
+    hidden ? button.classList.add("hidden") : button.classList.remove("hidden");
+  }
+};
+
+// Cancel Handler
+const handleCancel = async () => {
+  try {
+    console.log("Canceling generation...");
+    const data = await apiClient.post("http://localhost:8080/api/cancel");
+    alert(data.message);
+    
+    uiHelpers.toggleButtonState(domElements.cancelButton, { hidden: true });
+    uiHelpers.toggleButtonState(domElements.generateButton, { disabled: false });
+  } catch (error) {
+    alert("An error occurred. Please try again later.");
+    console.error("Cancel error:", error);
+  }
+};
+
+// Video Generation Handler
+const handleGenerateVideo = async () => {
+  try {
+    console.log("Generating video...");
+    const payload = {
+      videoSubject: domElements.videoSubject.value,
+      aiModel: domElements.aiModel.value,
+      voice: domElements.voice.value,
+      zipUrl: domElements.zipUrl.value,
+      paragraphNumber: domElements.paragraphNumber.value,
+      youtubeUpload: domElements.youtubeToggle.checked,
+      useMusic: domElements.useMusicToggle.checked,
+      customPrompt: domElements.customPrompt.value
+    };
+
+    uiHelpers.toggleButtonState(domElements.generateButton, { disabled: true });
+    uiHelpers.toggleButtonState(domElements.cancelButton, { hidden: false });
+
+    const response = await apiClient.post("http://localhost:8080/api/generate", payload);
+    console.log("Generation response:", response);
+  } catch (error) {
+    uiHelpers.toggleButtonState(domElements.generateButton, { disabled: false });
+    uiHelpers.toggleButtonState(domElements.cancelButton, { hidden: true });
+    console.error("Generation error:", error);
+    alert("Generation failed. Please check the console for details.");
+  }
+};
+
+// Event Listeners
+domElements.advancedOptionsToggle?.addEventListener("click", toggleAdvancedOptions);
+domElements.generateButton?.addEventListener("click", handleGenerateVideo);
+domElements.cancelButton?.addEventListener("click", handleCancel);
