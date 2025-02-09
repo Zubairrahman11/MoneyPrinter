@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আমার ব্যক্তিগত পেজ</title>
+    <title>আমার ব্যক্তিগত পেজ। আস্তে আস্তে শিখার চেষ্টা করতেছি। কিছু শিখতে হলে তার প্রতি আগ্রহ থাকা হয় সবচেয়ে বড় কথা সেই জিনিসটা আমার আছে ইনশাল্লাহ আমি সাকসেস হব</title>
     <style>
         body {
             font-family: Arial, sans-serif;
