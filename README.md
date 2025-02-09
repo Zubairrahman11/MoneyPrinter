@@ -17,9 +17,9 @@
 <body>
     <h1>আমার নাম: [Rahman zubair]</h1>
     <p>আমি [secondary School certificate]।</p>
-    <h2>আমার সম্পর্কে</h2>
+    <h2>আমার সম্পর্কে</h2>আমি প্রোগ্রামিং এ একদম নতুন শিখার চেষ্টা করতেছি এখন শিখতেছি
     <p>[I can learn corde ]</p>
-    <h2>যোগাযোগ</h2>
+    <h2>যোগাযোগ</h2>যুগে যুগে কেন আমাকে ফোন দিতে পারেন। আমার মোবাইল নাম্বার হল+6589568391 এ
     <p>ইমেইল: [rahmanzubair50@gmail.com]</p>
     <p>ফেসবুক: [https://www.facebook.com/share/1BT6rnMgUn/]</p>
 </body>
